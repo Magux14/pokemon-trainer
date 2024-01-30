@@ -1,0 +1,24 @@
+.pokemon-sprite {
+    height: 30.5vh;
+    transform: scale(1.1);
+    overflow: hidden;
+}
+
+.animate-pokemon {
+    height: 30.5vh;
+    transform: scale(1.2);
+    overflow: hidden;
+    animation: action 0.2s infinite alternate;
+}
+
+@keyframes action {
+    0% {
+        transform: translateY(0) scale(1.2);
+        ;
+    }
+
+    100% {
+        transform: translateY(-.5px) scale(1.2);
+        ;
+    }
+}

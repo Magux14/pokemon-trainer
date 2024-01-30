@@ -1,0 +1,12 @@
+html, body, #root {
+    height: 100% !important;
+}
+
+.grid-container {
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.full-height {
+    height: 100%;
+}
