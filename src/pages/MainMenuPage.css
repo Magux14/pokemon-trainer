@@ -29,6 +29,13 @@
     justify-content: center;
 }
 
+.flex-center-inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .area-containter {
     padding: 20px;
     border: 15px solid rgb(161, 14, 14);
@@ -80,4 +87,16 @@
     80% {
         opacity: 1;
     }
+}
+
+.type {
+    padding: 5px;
+    color: white;
+    border-radius: 3px;
+    background: black;
+    text-align: center;
+}
+
+.capitalize {
+    text-transform: capitalize;
 }

@@ -1,25 +1,28 @@
-import { useState } from "react";
 import Pokemon from "../components/Pokemon"
 import {
   useNavigate
 } from "react-router-dom";
 import { useSearchParams } from "react-router-dom/dist";
-import { Col, Row } from "react-bootstrap";
 import background from "../assets/img/background-battle.png";
+import { useMyPokemonList } from "../hooks/useMyPokemonList";
+import { useFetchPokemon } from "../hooks/useFetchPokemon";
+import { useEffect } from "react";
 
 export const PokemonBattlePage = () => {
 
-  const getRandomPokemonNum = () => {
-    return 1 + Math.floor(Math.random() * 242);
-  }
+  const { currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList([]);
   const [searchParams] = useSearchParams();
   const myPokemonNum = searchParams.get("myPokemonNum");
-  const [enemyPokemonNum] = useState(getRandomPokemonNum())
+  const { pokemon: enemyPokemon } = useFetchPokemon();
   const navigate = useNavigate();
-
   const redirect = (page) => {
     navigate(page);
   }
+
+  useEffect(() => {
+    const pokemon = lstPokemon.find(item => item.id == myPokemonNum);
+    setCurrentPokemon(pokemon);
+  }, [lstPokemon]);
 
   return (
     <div className="full-height" style={{
@@ -31,9 +34,10 @@ export const PokemonBattlePage = () => {
       overflow: 'hidden'
     }}>
       <button className="btn btn-primary" onClick={() => redirect('/')} style={{ position: 'absolute', zIndex: 10 }}>Regresar</button>
-      <Pokemon num={enemyPokemonNum} type={'battle'} showName={true} />
-      {myPokemonNum &&
-        <Pokemon num={myPokemonNum} front={false} type={'battle'} />}
+      <button className="btn btn-primary" onClick={() => addPokemonToMyList(enemyPokemon)} style={{ position: 'absolute', zIndex: 10, top: '10%' }}>Catch</button>
+      {enemyPokemon && <Pokemon pokemon={enemyPokemon} type={'battle'} showName={true} />}
+      {currentPokemon && myPokemonNum &&
+        <Pokemon pokemon={currentPokemon} front={false} type={'battle'} />}
     </div>
   )
 }

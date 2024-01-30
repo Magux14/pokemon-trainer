@@ -36,10 +36,13 @@
     color: white;
     background: black;
     border-radius: 3px;
-    padding: 5px;
+    padding-right: 10%;
+    padding-left: 10%;
     right: 0;
     top: 0;
     z-index: 20;
+    font-size: 1.5em;
+    text-transform: capitalize;
 }
 
 .back-pokemon-battle {
@@ -66,3 +69,4 @@
 .background-battle {
     background-image: 'assets/img/background-battle.png';
 }
+
