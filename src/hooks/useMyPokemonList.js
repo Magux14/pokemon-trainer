@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const myPokemonListKey = 'my-pokemons';
 
 export const useMyPokemonList = () => {
@@ -30,25 +30,18 @@ export const useMyPokemonList = () => {
         return 1 + Math.floor(Math.random() * 242);
     }
 
-    const genPokemonTest = () => {
-        const lstNewPokemon = [];
-        for (let i = 0; i < 6; i++) {
-            lstNewPokemon.push(getRandomPokemonNum());
-        }
-        setLstPokemon(lstNewPokemon);
-        setCurrentPokemon(null);
+    const setCompleteLstPokemon = (lstPokemon) =>{
+        localStorage.setItem(myPokemonListKey, JSON.stringify(lstPokemon));
+        setLstPokemon(lstPokemon || []);
     }
 
-    useEffect(() => {
-        getMyLstPokemon();
-    }, [])
-
     return {
-        lstPokemon,
         addPokemonToMyList,
-        genPokemonTest,
         currentPokemon,
+        getMyLstPokemon,
+        getRandomPokemonNum,
+        lstPokemon,
         setCurrentPokemon,
-        getRandomPokemonNum
+        setCompleteLstPokemon
     }
 }

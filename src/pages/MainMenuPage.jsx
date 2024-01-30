@@ -1,16 +1,18 @@
 import Pokemon from "../components/Pokemon"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './MainMenuPage.css'
 import { Row, Col } from 'react-bootstrap';
 import {
     useNavigate
 } from "react-router-dom";
 import { useMyPokemonList } from "../hooks/useMyPokemonList";
+import { useFetchPokemon } from "../hooks/useFetchPokemon";
 
 export const MainMenuPage = () => {
 
-    const { lstPokemon, genPokemonTest, currentPokemon, setCurrentPokemon } = useMyPokemonList([]);
+    const { lstPokemon, setCompleteLstPokemon, getMyLstPokemon, currentPokemon, setCurrentPokemon } = useMyPokemonList([]);
     const [battleEffect, setBattleEffect] = useState(false);
+    const { getPokemon, getRandomPokemonNum } = useFetchPokemon();
 
     const navigate = useNavigate();
     const redirect = (page) => {
@@ -29,7 +31,6 @@ export const MainMenuPage = () => {
     }
 
     const PokemonInfo = () => {
-        console.log('poke info', currentPokemon);
         if (!currentPokemon) {
             return <></>
         }
@@ -43,6 +44,20 @@ export const MainMenuPage = () => {
             </div>
         )
     }
+
+    const genPokemonRandom = async () => {
+        const lstNewPokemon = [];
+        for (let i = 0; i < 6; i++) {
+            const pokemon = await getPokemon(getRandomPokemonNum());
+            lstNewPokemon.push(pokemon);
+        }
+        setCompleteLstPokemon(lstNewPokemon);
+        setCurrentPokemon(null);
+    }
+
+    useEffect(() => {
+        getMyLstPokemon();
+    }, []);
 
     return (
         <>
@@ -75,7 +90,7 @@ export const MainMenuPage = () => {
                             <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter " >
                             </Col>
                             <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter ">
-                                <button className="btn btn-primary" onClick={genPokemonTest}>Gen Pokemon</button>
+                                <button className="btn btn-primary" onClick={genPokemonRandom}>Gen Pokemon</button>
                             </Col>
                         </Row>
                     </Col>

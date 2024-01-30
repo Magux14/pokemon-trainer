@@ -10,19 +10,25 @@ import { useEffect } from "react";
 
 export const PokemonBattlePage = () => {
 
-  const { currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList([]);
+  const { getMyLstPokemon, currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList([]);
   const [searchParams] = useSearchParams();
   const myPokemonNum = searchParams.get("myPokemonNum");
-  const { pokemon: enemyPokemon } = useFetchPokemon();
+  const { pokemon: enemyPokemon, getFetch } = useFetchPokemon();
   const navigate = useNavigate();
   const redirect = (page) => {
     navigate(page);
   }
 
   useEffect(() => {
+    getMyLstPokemon();
+    getFetch();
+  }, []);
+
+  useEffect(() => {
     const pokemon = lstPokemon.find(item => item.id == myPokemonNum);
     setCurrentPokemon(pokemon);
   }, [lstPokemon]);
+
 
   return (
     <div className="full-height" style={{

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const useFetchPokemon = (pokemonNum) => {
 
@@ -6,27 +6,28 @@ export const useFetchPokemon = (pokemonNum) => {
         return 1 + Math.floor(Math.random() * 242);
     }
 
-    if(!pokemonNum){
+    if (!pokemonNum) {
         pokemonNum = getRandomPokemonNum();
     }
-  
-    const url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonNum;
+
+    const url = 'https://pokeapi.co/api/v2/pokemon/';
     const [apiResponse, setApiResponse] = useState({
         loading: true,
         pokemon: {}
     });
 
-    const getFetch = async () => {
-        console.log('Llamada a la API: ' + url);
-        const resp = await fetch(url).catch(( )=> null);
-        if(!resp){
+    const getPokemon = async (id) => {
+        const fullUrl = url + id;
+        console.log('Llamada a la API: ' + fullUrl);
+        const resp = await fetch(fullUrl).catch(() => null);
+        if (!resp) {
             return;
         }
-        const data = await resp.json().catch(( )=> null)
-        if(!data){
+        const data = await resp.json().catch(() => null)
+        if (!data) {
             return;
         }
-        const pokemon ={
+        const pokemon = {
             id: data.id,
             name: data.name,
             spriteFront: data.sprites.front_default,
@@ -34,19 +35,22 @@ export const useFetchPokemon = (pokemonNum) => {
             baseExperience: data.base_experience,
             types: data.types.map(item => item.type.name)
         }
+
+        return pokemon;
+    }
+
+    const getFetch = async () => {
+        const pokemon = await getPokemon(pokemonNum)
         setApiResponse({
             loading: false,
             pokemon
         })
     }
 
-    useEffect(() => {
-        console.log('useEffect useFetchPokemon');
-        getFetch();
-
-    }, []);
-
     return {
-        ...apiResponse
+        ...apiResponse,
+        getFetch,
+        getPokemon,
+        getRandomPokemonNum
     }
 }
