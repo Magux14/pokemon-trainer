@@ -24,7 +24,6 @@ export const useFetchPokemon = (url) => {
             spriteBack: data.sprites.back_default,
             baseExperience: data.base_experience
         }
-        console.log(pokemon);
         setApiResponse({
             loading: false,
             pokemon
