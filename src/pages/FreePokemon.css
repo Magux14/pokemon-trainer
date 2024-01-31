@@ -7,24 +7,24 @@
     top: -25%;
     right: 45%;
     transform: scale(2);
-    animation: move-circle-disappear 3s normal linear forwards;
+    animation: move-circle-disappear 2.5s normal linear forwards;
 }
 
 @keyframes move-circle-disappear {
     0% {
-        transform: translateY(0%) scale(2);
+        transform: translateY(0) scale(2);
     }
 
     10% {
-        transform: translateY(220%) scale(2) rotate(-60deg);
+        transform: translateY(65vh) scale(2) rotate(-60deg);
     }
 
     55% {
-        transform: translateY(260%) scale(1) rotate(-560deg);
+        transform: translateY(75vh) scale(1) rotate(-760deg);
     }
 
     99% {
-        transform: translateY(280%) scale(0.2) rotate(-1260deg);
+        transform: translateY(75vh) scale(0.2) rotate(-1660deg);
     }
 
     100% {
