@@ -1,5 +1,5 @@
 import { useState } from "react";
-const myPokemonListKey = 'my-pokemons';
+export const myPokemonListKey = 'my-pokemons';
 
 export const useMyPokemonList = () => {
 

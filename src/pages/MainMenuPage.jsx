@@ -67,16 +67,16 @@ export const MainMenuPage = () => {
         getMyLstPokemon();
     }, []);
 
-    const openFreePokemonModal = () =>{
+    const openFreePokemonModal = () => {
         setShowFreePokemonModal(true);
     }
 
-    const closeFreePokemonModal = ()=>{
+    const closeFreePokemonModal = () => {
         setShowFreePokemonModal(false);
     }
 
-    const acceptToFreePokemon = () =>{
-        const {id} = currentPokemon;
+    const acceptToFreePokemon = () => {
+        const { id } = currentPokemon;
         redirect('freePokemon?pokemonId=' + id);
         closeFreePokemonModal();
     }
@@ -103,8 +103,8 @@ export const MainMenuPage = () => {
                         <Row style={{ height: '50%' }}>
                             <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter " >
                                 <PokemonInfo />
-                                <hr/>
-                                <button className="btn btn-outline-primary" onClick={openFreePokemonModal}>Liberar Pokémon</button>
+                                <hr />
+                                {currentPokemon && lstPokemon.length > 1 && <button className="btn btn-outline-primary" onClick={openFreePokemonModal}>Liberar Pokémon</button>}
                             </Col>
                             <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter ">
                                 <button className="btn btn-primary" onClick={() => goToBattle()}>Pokémon salvaje</button>
@@ -121,15 +121,15 @@ export const MainMenuPage = () => {
 
                 </Row>
             </div>
-            {currentPokemon && 
-            <CustomModal 
-            show={showFreePokemonModal} 
-            title={'¿Deseas liberar a "' + currentPokemon.name + '"? Ya no será parte de tu equipo'} 
-            okText={'Liberar'} 
-            cancelText={'Cancelar'}
-            cancelCallback={closeFreePokemonModal}
-            acceptCallback={acceptToFreePokemon}
-            />}
+            {currentPokemon &&
+                <CustomModal
+                    show={showFreePokemonModal}
+                    title={'¿Deseas liberar a "' + currentPokemon.name + '"? Ya no será parte de tu equipo'}
+                    okText={'Liberar'}
+                    cancelText={'Cancelar'}
+                    cancelCallback={closeFreePokemonModal}
+                    acceptCallback={acceptToFreePokemon}
+                />}
         </>
     )
 }
