@@ -81,6 +81,13 @@ export const MainMenuPage = () => {
         closeFreePokemonModal();
     }
 
+    const capitalizeFirstLetter = (string) => {
+        if(!string){
+            return string;
+        }
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     return (
         <>
             {battleEffect && <div id="black-screen"></div>}
@@ -124,11 +131,12 @@ export const MainMenuPage = () => {
             {currentPokemon &&
                 <CustomModal
                     show={showFreePokemonModal}
-                    title={'¿Deseas liberar a "' + currentPokemon.name + '"? Ya no será parte de tu equipo'}
+                    title={'¿Deseas liberar a "' + capitalizeFirstLetter(currentPokemon.name) + '"? Ya no será parte de tu equipo'}
                     okText={'Liberar'}
                     cancelText={'Cancelar'}
                     cancelCallback={closeFreePokemonModal}
                     acceptCallback={acceptToFreePokemon}
+                    imgUrl={currentPokemon.spriteFront}
                 />}
         </>
     )
