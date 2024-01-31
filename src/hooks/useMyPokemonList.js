@@ -35,6 +35,16 @@ export const useMyPokemonList = () => {
         setLstPokemon(lstPokemon || []);
     }
 
+    const removePokemon = ( id)=>{
+        let lstPokemon = JSON.parse(localStorage.getItem(myPokemonListKey)) || [];
+        const index = lstPokemon.findIndex(item => item.id == id);
+        if(index != -1){
+            lstPokemon.splice(index, 1);
+        }
+        localStorage.setItem(myPokemonListKey, JSON.stringify(lstPokemon));
+        setLstPokemon(lstPokemon);
+    }
+
     return {
         addPokemonToMyList,
         currentPokemon,
@@ -42,6 +52,7 @@ export const useMyPokemonList = () => {
         getRandomPokemonNum,
         lstPokemon,
         setCurrentPokemon,
-        setCompleteLstPokemon
+        setCompleteLstPokemon,
+        removePokemon
     }
 }

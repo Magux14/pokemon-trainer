@@ -12,7 +12,7 @@ export const PokemonBattlePage = () => {
 
   const { getMyLstPokemon, currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList([]);
   const [searchParams] = useSearchParams();
-  const myPokemonNum = searchParams.get("myPokemonNum");
+  const pokemonId = searchParams.get("pokemonId");
   const { pokemon: enemyPokemon, getFetch } = useFetchPokemon();
   const navigate = useNavigate();
   const redirect = (page) => {
@@ -25,7 +25,7 @@ export const PokemonBattlePage = () => {
   }, []);
 
   useEffect(() => {
-    const pokemon = lstPokemon.find(item => item.id == myPokemonNum);
+    const pokemon = lstPokemon.find(item => item.id == pokemonId);
     setCurrentPokemon(pokemon);
   }, [lstPokemon]);
 
@@ -42,7 +42,7 @@ export const PokemonBattlePage = () => {
       <button className="btn btn-primary" onClick={() => redirect('/')} style={{ position: 'absolute', zIndex: 10 }}>Regresar</button>
       <button className="btn btn-primary" onClick={() => addPokemonToMyList(enemyPokemon)} style={{ position: 'absolute', zIndex: 10, top: '10%' }}>Catch</button>
       {enemyPokemon && <Pokemon pokemon={enemyPokemon} type={'battle'} showName={true} />}
-      {currentPokemon && myPokemonNum &&
+      {currentPokemon && pokemonId &&
         <Pokemon pokemon={currentPokemon} front={false} type={'battle'} />}
     </div>
   )
