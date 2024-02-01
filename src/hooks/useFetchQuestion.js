@@ -63,12 +63,13 @@ export const useFetchQuestion = () => {
         }
 
         const questionData = data[0];
+        const shuffledQuestions = [
+            questionData.correctAnswer,
+            ...questionData.incorrectAnswers
+        ].sort(() => Math.random() - 0.5);
         const question = {
             text: questionData.question.text,
-            options: [
-                ...questionData.incorrectAnswers,
-                questionData.correctAnswer
-            ],
+            options: shuffledQuestions,
             correctAnswer: questionData.correctAnswer
         }
         setQuestion(question);

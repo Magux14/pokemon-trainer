@@ -13,7 +13,7 @@ const QuestionModal = ({ show, text, options, answer, successCallback, errorCall
     }
     return (
         <Modal show={show}>
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>{text}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
