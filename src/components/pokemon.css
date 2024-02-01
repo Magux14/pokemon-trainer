@@ -31,20 +31,6 @@
     animation: move-battle 0.2s infinite alternate;
 }
 
-.front-pokemon-battle-name {
-    position: absolute;
-    color: white;
-    background: black;
-    border-radius: 3px;
-    padding-right: 10%;
-    padding-left: 10%;
-    right: 0;
-    top: 0;
-    z-index: 20;
-    font-size: 1.5em;
-    text-transform: capitalize;
-}
-
 .back-pokemon-battle {
     position: absolute;
     height: 60vh;
@@ -62,4 +48,12 @@
     100% {
         transform: translateY(-.5px) scale(2.2);
     }
+}
+
+
+#bright {
+    height: 30.5vh;
+    transform: scale(1.1);
+    overflow: hidden;
+    filter: brightness(0) invert(1);
 }

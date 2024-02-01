@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { useMyPokemonList } from "../hooks/useMyPokemonList";
 import { useFetchPokemon } from "../hooks/useFetchPokemon";
-import CustomModal from "../components/Modal";
+import CustomModal from "../components/CustomModal";
 
 export const MainMenuPage = () => {
 
