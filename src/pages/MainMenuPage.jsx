@@ -100,7 +100,7 @@ export const MainMenuPage = () => {
                                     <Col key={'poke_' + index} xs={6} md={6} xl={6} xxl={6}
                                         className={currentPokemon.id == pokemon.id ? 'pokemon-list-container-selected' : 'pokemon-list-container'}
                                         onClick={() => setCurrentPokemon(pokemon)}>
-                                        <Pokemon pokemon={pokemon} animated={currentPokemon.id == pokemon.id} />
+                                        <Pokemon pokemon={pokemon} animated={currentPokemon.id == pokemon.id} cssClass={currentPokemon.id == pokemon.id? 'animate-pokemon-menu': 'pokemon-sprite-menu'}/>
                                     </Col>
                                 )
                             }

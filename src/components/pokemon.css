@@ -50,10 +50,48 @@
     }
 }
 
-
 #bright {
     height: 30.5vh;
     transform: scale(1.1);
     overflow: hidden;
     filter: brightness(0) invert(1);
 }
+
+/* Transitions */
+.front-pokemon-battle-enter-right {
+    position: absolute;
+    height: 30vh;
+    right: 18%;
+    bottom: 35%;
+    animation: move-battle-presentation-right 1.4s linear forwards;
+    overflow: hidden;
+}
+@keyframes move-battle-presentation-right {
+    0% {
+        transform: translateX(-250%) scale(2.2);
+    }
+  
+    100% {
+        transform: translateX(0) scale(2.2);
+    }
+}
+
+.back-pokemon-battle-enter-left {
+    position: absolute;
+    height: 60vh;
+    left: 8%;
+    bottom: -10%;
+    animation: move-battle-presentation-left 1.3s linear forwards;
+    overflow: hidden;
+}
+@keyframes move-battle-presentation-left {
+    0% {
+        transform: translateX(250%) scale(2.2);
+    }
+  
+    100% {
+        transform: translateX(0%) scale(2.2);
+    }
+  }
+  
+  

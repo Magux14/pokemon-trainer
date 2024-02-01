@@ -78,3 +78,20 @@
   font-size: 1.5em;
   text-transform: capitalize;
 }
+
+#button-catch {
+  position: absolute;
+  z-index: 10;
+  bottom: 10%;
+  right: 5%;
+  font-size: 2em;
+}
+
+#button-not-catch {
+  position: absolute;
+  z-index: 10;
+  bottom: 10%;
+  right: 30%;
+  font-size: 2em;
+}
+

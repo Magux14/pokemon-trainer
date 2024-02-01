@@ -1,14 +1,14 @@
 import './pokemon.css';
-const Pokemon = ({ pokemon, front = true, animated = false, type = 'menu', cssId}) => {
+const Pokemon = ({ pokemon, front = true, type = 'menu', cssId, cssClass}) => {
 
-    const { id, name, spriteFront, spriteBack } = pokemon;
+    const { name, spriteFront, spriteBack } = pokemon;
     return (
         <>
             {pokemon && type == 'menu' &&
-                <img id={cssId} src={front ? spriteFront : spriteBack} className={animated ? 'animate-pokemon-menu' : 'pokemon-sprite-menu'} alt={name} />
+                <img id={cssId} src={front ? spriteFront : spriteBack} className={cssClass} alt={name} />
             }
             {pokemon && type == 'battle' &&
-                <img id={cssId} src={front ? spriteFront : spriteBack} className={front ? 'front-pokemon-battle' : 'back-pokemon-battle'} alt={name} />
+                <img id={cssId} src={front ? spriteFront : spriteBack} className={cssClass} alt={name} />
             }
         </>
     )

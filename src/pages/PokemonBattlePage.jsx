@@ -20,6 +20,7 @@ export const PokemonBattlePage = () => {
   const [pokeball, setPokeball] = useState(false);
   const [showEnemyPokemon, setShowEnemyPokemon] = useState(true);
   const [showBrightPokemon, setShowBrightPokemon] = useState(false);
+  const [pokemonAnimationTransition, setPokemonAnimationTransition] = useState({ myPokemon: 'back-pokemon-battle-enter-left', enemy: 'front-pokemon-battle-enter-right' });
   const [searchParams] = useSearchParams();
   const pokemonId = searchParams.get("pokemonId");
   const { pokemon: enemyPokemon, getFetch } = useFetchPokemon();
@@ -32,6 +33,15 @@ export const PokemonBattlePage = () => {
     getMyLstPokemon();
     getFetch();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setPokemonAnimationTransition({
+        myPokemon: 'back-pokemon-battle',
+        enemy: 'front-pokemon-battle'
+      });
+    }, 1_400);
+  }, [enemyPokemon]);
 
   useEffect(() => {
     const pokemon = lstPokemon.find(item => item.id == pokemonId);
@@ -50,7 +60,7 @@ export const PokemonBattlePage = () => {
     setTimeout(() => {
       generateQuestion();
     }, 3_000);
-    setTimeout(() =>{
+    setTimeout(() => {
       setShowBrightPokemon(true);
     }, 700);
     setTimeout(() => {
@@ -73,12 +83,11 @@ export const PokemonBattlePage = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      <button className="btn btn-primary" onClick={() => redirect('/')} style={{ position: 'absolute', zIndex: 10 }}>Regresar</button>
-      <button className="btn btn-primary" onClick={() => tryToCath()} style={{ position: 'absolute', zIndex: 10, top: '10%' }}>Catch</button>
+
       {enemyPokemon && <span className="front-pokemon-battle-name">{enemyPokemon.name} #{enemyPokemon.id}</span>}
-      {showEnemyPokemon && enemyPokemon && <Pokemon cssId={showBrightPokemon? 'bright': ''} pokemon={enemyPokemon} type={'battle'}/>}
+      {showEnemyPokemon && enemyPokemon && <Pokemon cssId={showBrightPokemon ? 'bright' : ''} pokemon={enemyPokemon} type={'battle'} cssClass={pokemonAnimationTransition.enemy} />}
       {currentPokemon && pokemonId &&
-        <Pokemon pokemon={currentPokemon} front={false} type={'battle'} />}
+        <Pokemon pokemon={currentPokemon} front={false} type={'battle'} cssClass={pokemonAnimationTransition.myPokemon} />}
 
       {pokeball && <img id="pokeball" src={pokeballImg} alt="" />}
 
@@ -97,6 +106,9 @@ export const PokemonBattlePage = () => {
         successCallback={addCurrentPokemonTomyList}
         errorCallback={exit} />
       }
+
+      <button button id="button-not-catch" className="btn btn-secondary" onClick={() => redirect('/')}>Escapar</button>
+      <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>
     </div>
   )
 }
