@@ -16,7 +16,8 @@ export const MainMenuPage = () => {
         setCompleteLstPokemon,
         getMyLstPokemon,
         currentPokemon,
-        setCurrentPokemon
+        setCurrentPokemon,
+        reorderPokemon
     } = useMyPokemonList([]);
     const [battleEffect, setBattleEffect] = useState(false);
     const [showFreePokemonModal, setShowFreePokemonModal] = useState(false);
@@ -30,12 +31,21 @@ export const MainMenuPage = () => {
     const goToBattle = () => {
         setBattleEffect(true);
         setTimeout(() => {
-            redirect('/battle?pokemonId=' + currentPokemon?.id)
+            redirect('/battle?pokemonId=' + currentPokemon?.id);
+            if (currentPokemon) {
+                reorderPokemon(currentPokemon.id)
+            }
         }, 3_000);
     }
 
+    const selectCurrentPokemon = (pokemon) => {
+        // const audio = new Audio('https://pokemoncries.com/cries/' + pokemon.id + '.mp3');
+        // audio.play();
+        setCurrentPokemon(pokemon);
+    }
+
     if (!currentPokemon && lstPokemon.length > 0) {
-        setCurrentPokemon(lstPokemon[0]);
+        selectCurrentPokemon(lstPokemon[0]);
     }
 
     const PokemonInfo = () => {
@@ -82,7 +92,7 @@ export const MainMenuPage = () => {
     }
 
     const capitalizeFirstLetter = (string) => {
-        if(!string){
+        if (!string) {
             return string;
         }
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -99,8 +109,8 @@ export const MainMenuPage = () => {
                                 currentPokemon && lstPokemon.map((pokemon, index) =>
                                     <Col key={'poke_' + index} xs={6} md={6} xl={6} xxl={6}
                                         className={currentPokemon.id == pokemon.id ? 'pokemon-list-container-selected' : 'pokemon-list-container'}
-                                        onClick={() => setCurrentPokemon(pokemon)}>
-                                        <Pokemon pokemon={pokemon} animated={currentPokemon.id == pokemon.id} cssClass={currentPokemon.id == pokemon.id? 'animate-pokemon-menu': 'pokemon-sprite-menu'}/>
+                                        onClick={() => selectCurrentPokemon(pokemon)}>
+                                        <Pokemon pokemon={pokemon} animated={currentPokemon.id == pokemon.id} cssClass={currentPokemon.id == pokemon.id ? 'animate-pokemon-menu' : 'pokemon-sprite-menu'} />
                                     </Col>
                                 )
                             }

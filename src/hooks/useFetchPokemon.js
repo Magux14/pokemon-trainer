@@ -13,7 +13,7 @@ export const useFetchPokemon = (pokemonNum) => {
     const url = 'https://pokeapi.co/api/v2/pokemon/';
     const [apiResponse, setApiResponse] = useState({
         loading: true,
-        pokemon: {}
+        pokemon: null
     });
 
     const getPokemon = async (id) => {

@@ -30,16 +30,27 @@ export const useMyPokemonList = () => {
         return 1 + Math.floor(Math.random() * 242);
     }
 
-    const setCompleteLstPokemon = (lstPokemon) =>{
+    const setCompleteLstPokemon = (lstPokemon) => {
         localStorage.setItem(myPokemonListKey, JSON.stringify(lstPokemon));
         setLstPokemon(lstPokemon || []);
     }
 
-    const removePokemon = ( id)=>{
+    const removePokemon = (id) => {
         let lstPokemon = JSON.parse(localStorage.getItem(myPokemonListKey)) || [];
         const index = lstPokemon.findIndex(item => item.id == id);
-        if(index != -1){
+        if (index != -1) {
             lstPokemon.splice(index, 1);
+        }
+        localStorage.setItem(myPokemonListKey, JSON.stringify(lstPokemon));
+        setLstPokemon(lstPokemon);
+    }
+
+    const reorderPokemon = (id) => {
+        let lstPokemon = JSON.parse(localStorage.getItem(myPokemonListKey)) || [];
+        const index = lstPokemon.findIndex(item => item.id == id);
+        if (index != -1) {
+            const lstPokemonToMove = lstPokemon.splice(index, 1);
+            lstPokemon.unshift(...lstPokemonToMove);
         }
         localStorage.setItem(myPokemonListKey, JSON.stringify(lstPokemon));
         setLstPokemon(lstPokemon);
@@ -53,6 +64,7 @@ export const useMyPokemonList = () => {
         lstPokemon,
         setCurrentPokemon,
         setCompleteLstPokemon,
-        removePokemon
+        removePokemon,
+        reorderPokemon
     }
 }
