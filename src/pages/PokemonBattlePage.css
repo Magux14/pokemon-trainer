@@ -27,39 +27,39 @@
 
   /* Cae al suelo */
   30% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1680deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1680deg);
   }
 
   35% {
-    transform: translateY(55vh) translateX(68vw) rotate(-1660deg);
+    transform: translateY(40vh) translateX(68vw) rotate(-1660deg);
   }
 
   40% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1660deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1660deg);
   }
 
   55% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1680deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1680deg);
   }
 
   65% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1660deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1660deg);
   }
 
   70% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1680deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1680deg);
   }
 
   80% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1660deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1660deg);
   }
 
   90% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1680deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1680deg);
   }
 
   100% {
-    transform: translateY(60vh) translateX(68vw) rotate(-1660deg);
+    transform: translateY(45vh) translateX(68vw) rotate(-1660deg);
   }
 }
 

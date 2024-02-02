@@ -13,10 +13,10 @@ import CustomModal from "../components/CustomModal";
 import QuestionModal from "../components/QuestionModal";
 import './PokemonBattlePage.css';
 import { Col, Row } from "react-bootstrap";
+import Music from "../services/music.service";
 
 export const PokemonBattlePage = () => {
   console.log('PokemonBattlePage');
-
   const { getMyLstPokemon, currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList();
   const { question, generateQuestion, questionError } = useFetchQuestion();
   const [pokeball, setPokeball] = useState(false);
@@ -34,6 +34,7 @@ export const PokemonBattlePage = () => {
   }
 
   const exit = () => {
+    Music.stopMusic();
     redirect('/');
   }
 
@@ -46,7 +47,7 @@ export const PokemonBattlePage = () => {
     }, 700);
     setTimeout(() => {
       setShowEnemyPokemon(false);
-    }, 800)
+    }, 900)
     setPokeball(true);
   }
 
@@ -116,9 +117,7 @@ export const PokemonBattlePage = () => {
   return (
     <div id="battle-container" className="full-height" style={{
       backgroundImage: `url(${background})`,
-      backgroundPosition: 'center',
-      backgroundSize: '300vw',
-      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
       position: 'relative',
       overflow: 'hidden'
     }}>
@@ -148,7 +147,7 @@ export const PokemonBattlePage = () => {
 
 <Row>
   <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
-  {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => redirect('/')}>Escapar</button>}
+  {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => exit()}>Escapar</button>}
 
   </Col>
   <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">

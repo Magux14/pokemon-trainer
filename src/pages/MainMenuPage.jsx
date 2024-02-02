@@ -8,6 +8,8 @@ import {
 import { useMyPokemonList } from "../hooks/useMyPokemonList";
 import { useFetchPokemon } from "../hooks/useFetchPokemon";
 import CustomModal from "../components/CustomModal";
+import battleTheme from '../assets/sound/battle.ogg';
+import Music from "../services/music.service";
 
 export const MainMenuPage = () => {
 
@@ -30,6 +32,7 @@ export const MainMenuPage = () => {
 
     const goToBattle = () => {
         setBattleEffect(true);
+        playBattleMusic();
         setTimeout(() => {
             redirect('/battle?pokemonId=' + currentPokemon?.id);
             if (currentPokemon) {
@@ -98,12 +101,17 @@ export const MainMenuPage = () => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    const playBattleMusic = () => {
+        Music.loadMusic(battleTheme);
+        Music.playMusic();
+    }
+
     return (
         <>
             {battleEffect && <div id="black-screen"></div>}
             <div id="main-menu-container" className="grid-container full-height">
-                    <PokemonInfo />
-                    <hr/>
+                <PokemonInfo />
+                <hr />
                 <Row >
                     <Col xs={12} md={12} xl={12} xxl={12}  >
                         <Row >
@@ -118,31 +126,16 @@ export const MainMenuPage = () => {
                             }
                         </Row>
                     </Col>
-                    </Row>
-                    <Row>
-                    <Col className="flex-center" style={{padding: 5}}>
+                </Row>
+                <Row>
+                    <Col className="flex-center" style={{ padding: 5 }}>
 
-                                <hr />
-                                {currentPokemon && lstPokemon.length > 1 && <button className="btn btn-outline-primary" onClick={openFreePokemonModal}>Liberar Pokémon</button>}
-                                <hr />
-                                <button className="btn btn-primary" onClick={() => goToBattle()}>Pokémon salvaje</button>
-                                <hr />
-                                <button className="btn btn-primary" onClick={genPokemonRandom}>Gen Pokemon</button>
-                        {/* <Row style={{ height: '50%' }}>
-                            <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter " >
-                               
-                            </Col>
-                            <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter ">
-                                <button className="btn btn-primary" onClick={() => goToBattle()}>Pokémon salvaje</button>
-                            </Col>
-                        </Row>
-                        <Row style={{ height: '50%' }}>
-                            <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter " >
-                            </Col>
-                            <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter ">
-                                <button className="btn btn-primary" onClick={genPokemonRandom}>Gen Pokemon</button>
-                            </Col>
-                        </Row> */}
+                        <hr />
+                        {currentPokemon && lstPokemon.length > 1 && <button className="btn btn-outline-primary" onClick={openFreePokemonModal}>Liberar Pokémon</button>}
+                        <hr />
+                        <button className="btn btn-primary" onClick={() => goToBattle()}>Pokémon salvaje</button>
+                        <hr />
+                        <button className="btn btn-primary" onClick={genPokemonRandom}>Gen Pokemon</button>
                     </Col>
 
                 </Row>

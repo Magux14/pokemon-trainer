@@ -1,7 +1,6 @@
 import './pokemon.css';
 const Pokemon = ({ pokemon, front = true, type = 'menu', cssId, cssClass}) => {
 
-    console.log(pokemon.name, cssClass)
     const { name, spriteFront, spriteBack } = pokemon;
     return (
         <>
