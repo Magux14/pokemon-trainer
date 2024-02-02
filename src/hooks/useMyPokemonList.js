@@ -21,7 +21,7 @@ export const useMyPokemonList = () => {
             return;
         }
 
-        lstPokemon.push(pokemon);
+        lstPokemon.unshift(pokemon);
         localStorage.setItem(myPokemonListKey, JSON.stringify(lstPokemon));
         setLstPokemon(lstPokemon);
     }

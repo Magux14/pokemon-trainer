@@ -2,8 +2,19 @@ import { useState } from "react";
 
 export const useFetchPokemon = (pokemonNum) => {
 
-    const getRandomPokemonNum = () => {
-        return 1 + Math.floor(Math.random() * 242);
+    const getRandomPokemonNum = (legendary = false) => {
+
+        const lstLegendaryNums = [150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386];
+
+        if (legendary) {
+            return lstLegendaryNums[Math.floor(Math.random() * lstLegendaryNums.length)];
+        }
+
+        const normalNum = 1 + Math.floor(Math.random() * 386);
+        if (lstLegendaryNums.includes(normalNum)) {
+            return getRandomPokemonNum(legendary);
+        }
+        return normalNum;
     }
 
     if (!pokemonNum) {

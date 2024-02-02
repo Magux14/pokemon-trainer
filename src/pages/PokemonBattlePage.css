@@ -95,3 +95,12 @@
   font-size: 2em;
 }
 
+.correct {
+  background: rgb(187, 255, 187);
+  border: 2px solid rgb(36, 138, 32) !important;
+}
+
+.incorrect {
+  background: rgb(255, 187, 198);
+  border: 2px solid rgb(131, 21, 21) !important;;
+}

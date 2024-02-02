@@ -75,9 +75,14 @@ export const useFetchQuestion = () => {
         setQuestion(question);
     }
 
+    const removeQuestion = () =>{
+        setQuestion(null);
+    }
+
     return {
         question,
         generateQuestion,
-        questionError
+        questionError,
+        removeQuestion
     }
 }

@@ -23,6 +23,11 @@
     }
 }
 
+#scale-selectable {
+   height: 50vh;
+   transform: scale(1.4);
+}
+
 .front-pokemon-battle {
     position: absolute;
     height: 30vh;
@@ -94,4 +99,20 @@
     }
   }
   
+.front-pokemon-battle-flee-right {
+    position: absolute;
+    height: 30vh;
+    right: 18%;
+    bottom: 35%;
+    animation: move-battle-flee-right 1s linear forwards;
+    overflow: hidden;
+}
+@keyframes move-battle-flee-right {
+    0% {
+        transform: translateX(0) scale(2.2);
+    }
   
+    100% {
+        transform: translateX(850%) scale(2.2);
+    }
+}

@@ -14,16 +14,19 @@ import QuestionModal from "../components/QuestionModal";
 import './PokemonBattlePage.css';
 
 export const PokemonBattlePage = () => {
+  console.log('PokemonBattlePage');
 
   const { getMyLstPokemon, currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList();
   const { question, generateQuestion, questionError } = useFetchQuestion();
   const [pokeball, setPokeball] = useState(false);
   const [showEnemyPokemon, setShowEnemyPokemon] = useState(true);
   const [showBrightPokemon, setShowBrightPokemon] = useState(false);
+  const [battleEnded, setBattleEnded] = useState(false);
   const [pokemonAnimationTransition, setPokemonAnimationTransition] = useState({ myPokemon: 'back-pokemon-battle-enter-left', enemy: 'front-pokemon-battle-enter-right' });
   const [searchParams] = useSearchParams();
   const pokemonId = searchParams.get("pokemonId");
   const { pokemon: enemyPokemon, getFetch } = useFetchPokemon();
+  console.log('pokemonAnimationTransition', pokemonAnimationTransition);
 
   const updatePage = () => {
     location.reload();
@@ -48,7 +51,29 @@ export const PokemonBattlePage = () => {
 
   const addCurrentPokemonTomyList = () => {
     addPokemonToMyList(enemyPokemon);
-    exit();
+    setBattleEnded(true);
+    setTimeout(() => {
+      exit();
+    }, 1_000)
+  }
+
+  const runAnimationPokemonNotCaptured = () => {
+    setBattleEnded(true);
+    setShowEnemyPokemon(true);
+    setTimeout(() => {
+      setShowBrightPokemon(false);
+      setTimeout(() => {
+      console.log('setPokemonAnimationTransition');
+        setPokemonAnimationTransition((pkAnim) => {
+          pkAnim.enemy = 'front-pokemon-battle-flee-right'
+          return {...pkAnim};
+        });
+
+        setTimeout(() => {
+          exit();
+        }, 1_000)
+      }, 500)
+    }, 500);
   }
 
   const navigate = useNavigate();
@@ -111,17 +136,17 @@ export const PokemonBattlePage = () => {
         acceptCallback={updatePage}
       />
 
-      {question && <QuestionModal
+      {!battleEnded && question && <QuestionModal
         show={question?.text}
         text={question.text}
         options={question.options}
         answer={question.correctAnswer}
         successCallback={addCurrentPokemonTomyList}
-        errorCallback={exit} />
+        errorCallback={runAnimationPokemonNotCaptured} />
       }
 
-      <button id="button-not-catch" className="btn btn-secondary" onClick={() => redirect('/')}>Escapar</button>
-      <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>
+      {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => redirect('/')}>Escapar</button>}
+      {!pokeball && <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>}
     </div>
   )
 }
