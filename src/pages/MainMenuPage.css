@@ -1,5 +1,21 @@
 #main-menu-container {
     background-color: rgb(173, 43, 43);
+    padding: 5%;
+}
+
+.pokemon-info-container {
+    text-align: center;
+    background: rgb(157, 207, 157);
+    width: 100%;
+    padding: 5%;
+    border-radius: 10px;
+}
+
+.pokemon-types-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .pokemon-list-container {

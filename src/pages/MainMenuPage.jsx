@@ -54,10 +54,10 @@ export const MainMenuPage = () => {
         }
 
         return (
-            <div>
+            <div className="pokemon-info-container">
                 <h2 className="capitalize">{currentPokemon.name}</h2>
-                <div className="flex-center-inline capitalize">
-                    {currentPokemon.types?.map(type => <div key={type} className="type">{type}</div>)}
+                <div className="capitalize pokemon-types-container ">
+                    {currentPokemon.types?.map(type => <span key={type} className="type">{type}</span>)}
                 </div>
             </div>
         )
@@ -102,12 +102,14 @@ export const MainMenuPage = () => {
         <>
             {battleEffect && <div id="black-screen"></div>}
             <div id="main-menu-container" className="grid-container full-height">
-                <Row className="full-height">
-                    <Col xs={4} md={4} xl={4} xxl={4}  >
+                    <PokemonInfo />
+                    <hr/>
+                <Row >
+                    <Col xs={12} md={12} xl={12} xxl={12}  >
                         <Row >
                             {
                                 currentPokemon && lstPokemon.map((pokemon, index) =>
-                                    <Col key={'poke_' + index} xs={6} md={6} xl={6} xxl={6}
+                                    <Col key={'poke_' + index} xs={4} md={4} xl={4} xxl={4}
                                         className={currentPokemon.id == pokemon.id ? 'pokemon-list-container-selected' : 'pokemon-list-container'}
                                         onClick={() => selectCurrentPokemon(pokemon)}>
                                         <Pokemon pokemon={pokemon} animated={currentPokemon.id == pokemon.id} cssClass={currentPokemon.id == pokemon.id ? 'animate-pokemon-menu' : 'pokemon-sprite-menu'} />
@@ -116,12 +118,19 @@ export const MainMenuPage = () => {
                             }
                         </Row>
                     </Col>
-                    <Col xs={8} md={8} xl={8} xxl={8}>
-                        <Row style={{ height: '50%' }}>
-                            <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter " >
-                                <PokemonInfo />
+                    </Row>
+                    <Row>
+                    <Col className="flex-center" style={{padding: 5}}>
+
                                 <hr />
                                 {currentPokemon && lstPokemon.length > 1 && <button className="btn btn-outline-primary" onClick={openFreePokemonModal}>Liberar Pokémon</button>}
+                                <hr />
+                                <button className="btn btn-primary" onClick={() => goToBattle()}>Pokémon salvaje</button>
+                                <hr />
+                                <button className="btn btn-primary" onClick={genPokemonRandom}>Gen Pokemon</button>
+                        {/* <Row style={{ height: '50%' }}>
+                            <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter " >
+                               
                             </Col>
                             <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter ">
                                 <button className="btn btn-primary" onClick={() => goToBattle()}>Pokémon salvaje</button>
@@ -133,7 +142,7 @@ export const MainMenuPage = () => {
                             <Col xs={6} md={6} xl={6} xxl={6} className="flex-center area-containter ">
                                 <button className="btn btn-primary" onClick={genPokemonRandom}>Gen Pokemon</button>
                             </Col>
-                        </Row>
+                        </Row> */}
                     </Col>
 
                 </Row>

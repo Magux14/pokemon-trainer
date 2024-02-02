@@ -1,11 +1,11 @@
 .pokemon-sprite-menu {
-    height: 30.5vh;
+    height: 15vh;
     transform: scale(1.1);
     overflow: hidden;
 }
 
 .animate-pokemon-menu {
-    height: 30.5vh;
+    height: 15vh;
     transform: scale(1.2);
     overflow: hidden;
     animation: move-menu 0.2s infinite alternate;
@@ -24,25 +24,27 @@
 }
 
 #scale-selectable {
-   height: 50vh;
-   transform: scale(1.4);
+   height: 50vw;
+   transform: scale(1.1);
 }
 
 .front-pokemon-battle {
     position: absolute;
-    height: 30vh;
-    right: 18%;
-    bottom: 35%;
+    height: 30vw;
+    right: 10%;
+    bottom: 50%;
     animation: move-battle 0.2s infinite alternate;
+    z-index: 7;
 }
 
 .back-pokemon-battle {
     position: absolute;
-    height: 60vh;
-    left: 8%;
-    bottom: -10%;
+    height: 60vw;
+    left: 0;
+    bottom: 10%;
     animation: move-battle 0.2s infinite alternate;
     overflow: hidden;
+    z-index: 9;
 }
 
 @keyframes move-battle {
@@ -56,7 +58,7 @@
 }
 
 #bright {
-    height: 30.5vh;
+    height: 30vw;
     transform: scale(1.1);
     overflow: hidden;
     filter: brightness(0) invert(1);
@@ -65,9 +67,9 @@
 /* Transitions */
 .front-pokemon-battle-enter-right {
     position: absolute;
-    height: 30vh;
-    right: 18%;
-    bottom: 35%;
+    height: 30vw;
+    right: 10%;
+    bottom: 50%;
     animation: move-battle-presentation-right 1.4s linear forwards;
     overflow: hidden;
 }
@@ -83,9 +85,9 @@
 
 .back-pokemon-battle-enter-left {
     position: absolute;
-    height: 60vh;
-    left: 8%;
-    bottom: -10%;
+    height: 60vw;
+    left: 0;
+    bottom: 10%;
     animation: move-battle-presentation-left 1.3s linear forwards;
     overflow: hidden;
 }
@@ -101,9 +103,9 @@
   
 .front-pokemon-battle-flee-right {
     position: absolute;
-    height: 30vh;
-    right: 18%;
-    bottom: 35%;
+    height: 30vw;
+    right: 10%;
+    bottom: 50%;
     animation: move-battle-flee-right 1s linear forwards;
     overflow: hidden;
 }

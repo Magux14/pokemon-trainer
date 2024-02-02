@@ -12,6 +12,7 @@ import { useFetchQuestion } from "../hooks/useFetchQuestion";
 import CustomModal from "../components/CustomModal";
 import QuestionModal from "../components/QuestionModal";
 import './PokemonBattlePage.css';
+import { Col, Row } from "react-bootstrap";
 
 export const PokemonBattlePage = () => {
   console.log('PokemonBattlePage');
@@ -116,7 +117,7 @@ export const PokemonBattlePage = () => {
     <div id="battle-container" className="full-height" style={{
       backgroundImage: `url(${background})`,
       backgroundPosition: 'center',
-      backgroundSize: 'cover',
+      backgroundSize: '300vw',
       backgroundRepeat: 'no-repeat',
       position: 'relative',
       overflow: 'hidden'
@@ -145,8 +146,16 @@ export const PokemonBattlePage = () => {
         errorCallback={runAnimationPokemonNotCaptured} />
       }
 
-      {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => redirect('/')}>Escapar</button>}
-      {!pokeball && <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>}
+<Row>
+  <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
+  {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => redirect('/')}>Escapar</button>}
+
+  </Col>
+  <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
+  {!pokeball && <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>}
+
+  </Col>
+</Row>
     </div>
   )
 }

@@ -60,24 +60,20 @@ export const SelectFirstPokemon = () => {
         <>
             <div className="grid-container full-height" style={{background: '#75A7FA'}}>
                 <Row className="full-height">
-                <Col xs={1} md={1} xl={1} xxl={1}  >
-                    </Col>
-                    <Col xs={8} md={8} xl={8} xxl={8}  >
+                    <Col xs={12} md={12} xl={12} xxl={12}  >
                         <br/>
                         <h1>Selecciona a tu Pokémon inicial</h1>
                         <hr/>
-                        <Row className="flex-center-inline">
+                        <Row className="flex-center-inline" style={{ padding: 15}}>
                             {
                                 lstInitialPokemon.map((pokemon, index) =>
                                     <Col key={'poke_' + index} xs={4} md={4} xl={4} xxl={4} className="flex-center"
-                                        onClick={() => selectInitialPokemon(pokemon)} style={{ border: '10px solid black', borderRadius: 5,background: 'white', overflow: 'hidden'}}>
+                                        onClick={() => selectInitialPokemon(pokemon)} style={{ border: '5px solid black', borderRadius: 5,background: 'white', overflow: 'hidden'}}>
                                         <Pokemon pokemon={pokemon} cssId={'scale-selectable'}/>
                                     </Col>
                                 )
                             }
                         </Row>
-                    </Col>
-                    <Col xs={3} md={3} xl={3} xxl={3}  >
                         <img id="oak" src={profOak} alt=""/>
                     </Col>
                 </Row>

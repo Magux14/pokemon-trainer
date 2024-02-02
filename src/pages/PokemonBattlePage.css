@@ -1,10 +1,8 @@
 #pokeball {
   position: absolute;
   width: 2.5em;
-  /* left: 10%;
-  bottom: -10%; */
-  /* transform: scale(5); */
   animation: throw-pokeball 4s normal linear forwards;
+  z-index: 8;
 }
 
 @keyframes throw-pokeball {
@@ -74,7 +72,7 @@
   padding-left: 10%;
   right: 0;
   top: 0;
-  z-index: 20;
+  z-index: 10;
   font-size: 1.5em;
   text-transform: capitalize;
 }
@@ -82,16 +80,14 @@
 #button-catch {
   position: absolute;
   z-index: 10;
-  bottom: 10%;
-  right: 5%;
+  bottom: 5%;
   font-size: 2em;
 }
 
 #button-not-catch {
   position: absolute;
   z-index: 10;
-  bottom: 10%;
-  right: 30%;
+  bottom: 5%;
   font-size: 2em;
 }
 
