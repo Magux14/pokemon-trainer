@@ -13,10 +13,10 @@ import CustomModal from "../components/CustomModal";
 import QuestionModal from "../components/QuestionModal";
 import './PokemonBattlePage.css';
 import { Col, Row } from "react-bootstrap";
+import winTheme from '../assets/sound/win.mp3';
 import Music from "../services/music.service";
 
 export const PokemonBattlePage = () => {
-  console.log('PokemonBattlePage');
   const { getMyLstPokemon, currentPokemon, lstPokemon, setCurrentPokemon, addPokemonToMyList } = useMyPokemonList();
   const { question, generateQuestion, questionError } = useFetchQuestion();
   const [pokeball, setPokeball] = useState(false);
@@ -27,15 +27,18 @@ export const PokemonBattlePage = () => {
   const [searchParams] = useSearchParams();
   const pokemonId = searchParams.get("pokemonId");
   const { pokemon: enemyPokemon, getFetch } = useFetchPokemon();
-  console.log('pokemonAnimationTransition', pokemonAnimationTransition);
 
   const updatePage = () => {
     location.reload();
   }
 
-  const exit = () => {
-    Music.stopMusic();
-    redirect('/');
+  const exit = (stopMusic = true) => {
+    if (stopMusic) {
+      setTimeout(() => {
+        Music.stopMusic();
+      }, 1_000);
+    }
+    redirect('/main-menu');
   }
 
   const tryToCath = () => {
@@ -52,10 +55,12 @@ export const PokemonBattlePage = () => {
   }
 
   const addCurrentPokemonTomyList = () => {
+    Music.loadMusic(winTheme);
+    Music.playMusic();
     addPokemonToMyList(enemyPokemon);
     setBattleEnded(true);
     setTimeout(() => {
-      exit();
+      exit(false);
     }, 1_000)
   }
 
@@ -65,10 +70,9 @@ export const PokemonBattlePage = () => {
     setTimeout(() => {
       setShowBrightPokemon(false);
       setTimeout(() => {
-      console.log('setPokemonAnimationTransition');
         setPokemonAnimationTransition((pkAnim) => {
           pkAnim.enemy = 'front-pokemon-battle-flee-right'
-          return {...pkAnim};
+          return { ...pkAnim };
         });
 
         setTimeout(() => {
@@ -145,16 +149,16 @@ export const PokemonBattlePage = () => {
         errorCallback={runAnimationPokemonNotCaptured} />
       }
 
-<Row>
-  <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
-  {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => exit()}>Escapar</button>}
+      <Row>
+        <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
+          {!pokeball && <button id="button-not-catch" className="btn btn-secondary" onClick={() => exit()}>Escapar</button>}
 
-  </Col>
-  <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
-  {!pokeball && <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>}
+        </Col>
+        <Col xs={6} md={6} xl={6} xxl={6} className="flex-center">
+          {!pokeball && <button id="button-catch" className="btn btn-danger" onClick={() => tryToCath()}>Atrapar</button>}
 
-  </Col>
-</Row>
+        </Col>
+      </Row>
     </div>
   )
 }

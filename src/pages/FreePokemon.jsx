@@ -33,7 +33,7 @@ export const FreePokemon = () => {
             removePokemon(pokemon.id);
         }
         setTimeout(() =>{
-            redirect('/');
+            redirect('/main-menu');
         }, 2_000);
     }, [lstPokemon])
 

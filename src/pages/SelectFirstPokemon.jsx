@@ -13,7 +13,6 @@ import './SelectFirstPokemon.css';
 export const SelectFirstPokemon = () => {
 
     const [lstInitialPokemon, setLstInitialPokemon] = useState([])
-
     const {
         addPokemonToMyList
     } = useMyPokemonList([]);
@@ -25,13 +24,11 @@ export const SelectFirstPokemon = () => {
     }
 
     const getRandom3PokemonStartersNums = () =>{
-
         const lsrt1 = [1,4,7];
         const lsrt2 = [152, 155, 158];
         const lsrt3 = [252,255,258];
 
         const selectedList = [lsrt1, lsrt2, lsrt3][ Math.floor(Math.random() * 3)];
-        console.log(selectedList);
         return selectedList;
     }
 
@@ -48,13 +45,15 @@ export const SelectFirstPokemon = () => {
     const selectInitialPokemon = (pokemon) =>{
         localStorage.removeItem(myPokemonListKey);
         addPokemonToMyList(pokemon);
-        redirect('/');
+        redirect('/main-menu');
     }
 
     useEffect(() => {
+        if (localStorage.getItem(myPokemonListKey)) {
+            redirect('/main-menu');
+        }
         fillStartedPokemons();
     }, []);
-
 
     return (
         <>

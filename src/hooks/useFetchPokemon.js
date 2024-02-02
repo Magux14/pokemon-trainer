@@ -4,7 +4,7 @@ export const useFetchPokemon = (pokemonNum) => {
 
     const getRandomPokemonNum = (legendary = false) => {
 
-        const lstLegendaryNums = [150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386];
+        const lstLegendaryNums = [144, 145, 146, 150, 151, 243, 244, 245, 249, 250, 251, 377, 378, 379, 380, 381, 382, 383, 384, 385, 386];
 
         if (legendary) {
             return lstLegendaryNums[Math.floor(Math.random() * lstLegendaryNums.length)];
@@ -29,7 +29,6 @@ export const useFetchPokemon = (pokemonNum) => {
 
     const getPokemon = async (id) => {
         const fullUrl = url + id;
-        console.log('Llamada a la API: ' + fullUrl);
         const resp = await fetch(fullUrl).catch(() => null);
         if (!resp) {
             return;
