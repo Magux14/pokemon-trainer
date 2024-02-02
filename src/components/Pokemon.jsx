@@ -15,4 +15,5 @@ const Pokemon = ({ pokemon, front = true, type = 'menu', cssId, cssClass}) => {
     )
 }
 
+
 export default Pokemon;
